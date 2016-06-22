@@ -86,10 +86,12 @@ Once they're paired, get the sanity test running on everyone's machine.
 * don't worry about finishing, just write some code to get a sense of the problem
 * THIS IS NOT A TEST
 * YOU WILL NOT FINISH, don't worry, THIS IS NOT A TEST
+* Don't check things into master !!!!
 
 Set the timer for 30 minutes.
 9:15 - 9:45
 UserTesting started at 9:30
+
 
 * we interrupted you, that’s frustrating.
 * we are annoying you on purpose
@@ -169,6 +171,8 @@ Once all the goal post-its are up, have them guess the names of the 4 groups, an
 * Are you proud or embarrassed about your code?
 * Did you finish? (your solution is too complicated)
 * Is your code understandable (would it pass the inebriation test?)
+* How many different kinds of verse?
+* How do they differ?
 * Is this solution more complicated or simpler than the previous one?
 * How did you decide what code to write? (I saw a pattern and I went there. What if you don’t see a pattern?)
 * What force drove you to make these decisions?
@@ -240,6 +244,7 @@ By the end of Show & Tell, they should have picked a winner for Shameless Green.
 ### House, Shameless to DRY
 
 ***Prep***
+
 Push a version of House Shameless Green to master.  This can be one of the ones they just wrote, or mine.  To get mine:
 
     git checkout master
@@ -249,12 +254,7 @@ Push a version of House Shameless Green to master.  This can be one of the ones 
 
 Ask for a volunteer to type. Have them do a ```git pull``` and tell them you'll need them to hook up to the projector in just a minute.
 
-
-#### When to Refactor
-Make them define the word 'refactor':
-"Change the structure/arrangement of code without altering its behavior."
-
-Ask them if they use the word 'refactor' to mean implementing _new_ behavior. (They'll say yes.)  This is not refactoring.
+###### Shameless Green is Good Enough
 
 **Ask:**
 
@@ -267,28 +267,82 @@ Ask them if they use the word 'refactor' to mean implementing _new_ behavior. (T
   * What annoys you most about this code?
     (The duplication of strings.)
 
-  * Should you 'refactor' your current implementation house?  I.e., should you do more?
+Discuss if they should check it in and walk away.
+They need a requirements change to force them to improve the code.
 
-  * Do you have justification to do more?  Perhaps not (discuss, maybe need a new requirement), but let's pretend that we do.
 
+###### House Requirements Change
+
+The customer wants to inject new phrase bits into the algorithm.
+
+Now the bar is raised.  Things that change, do.  This means that what's okay for shameless green is not okay now that the code has begun to change.
+
+##### Talk about open/closed.
+
+* Ask them what the O in SOLID stands for (Open/Closed)
+* Ask them what Open/Closed is short for. (Open for extension/Closed for Modification)
+* Ask them what that means.
+* Ask them to imagine a world in which you never have to change existing code to implement new behavior.
+* Don't worry that this seems impossible, just pretend for a minute that it's true.
+* If it's true, what are the consequences?
+
+
+Make sure they say:
+_If my code where open/closed:
+  Adding new behavior can't break distant and unrelated things.
+  My existing tests would always run green._
+
+***Tell them:***
+
+You should deal with new requirements in two steps.
+
+  1. Make the existing code open to the new requirement
+  1. Implement the new requirement
+
+##### Step 1 is refactoring
+
+  Make them define the word 'refactor':
+  "Change the structure/arrangement of code without altering its behavior."
+
+  Ask them if they use the word 'refactor' to mean implementing _new_ behavior. (They'll say yes.)  This is not refactoring.
+
+#### Flowchart for dealing with a new requirement
+
+Questions they should ask when thinking about a new requirement:
+
+  * Flowchart questions:
+    * is this code open/closed to new requirement
+    * do you know how to make it open/closed
+    * fix the most approachable code smell
+
+For House Shameless:
+
+  * What's a "Code Smell"?
+  (a sign that something might be wrong)
+  * how to you fix code smells?
+  (with curative refactoring recipes)
+  * who can tell us the name of some code smell they're familiar with?
+  (well, sometimes they can :-) )
+  * what are the names of the code smells in this code?
+  * Condition, magic number, duplication
+  * What do you hate most, that you actually understand and know immediately how to fix? (duplication of strings)
+  * Okay, then, go fix the string duplication using the flocking rules.
 
 #### How to Refactor
 This is the start of DRYing out the strings using a very specific refactoring technique.
 
 ##### The specific plan
-1) find the strings that are most alike
+1) find the things that are most alike
 2) find the smallest difference between them
 3) make the smallest change that will remove the difference
-4) try to make changes only on a single line of code (can't always, but try)
-5) run the tests after each change
-6) if the tests fail, undo and make a better change
+  1) Parse some code.
+  2) Execute the code without using the result. (step is sometimes skipped)
+  3) Execute the code and use the result
+  4) Delete unused code.
 
-##### To make the actual change (step 3 above)
-
-1) Parse some code.
-2) Execute the code without using the result. (step is sometimes skipped)
-3) Execute the code and use the result
-4) Delete unused code.
+try to make changes only on a single line of code (can't always, but try)
+run the tests after each change
+if the tests fail, undo and make a better change
 
 Simple rules.  Like flocking or schooling rules, seemingly complex behavior emerges.
 
@@ -353,6 +407,7 @@ Remind them:
 2:00PM
 UserTesting at 1:30PM
 uminn2 at 2:3PM
+POODGATE at 2:00
 
 Consider asking them to switch pairs.
 
@@ -383,22 +438,6 @@ At the 10 minute mark, ask if they'll be done.  If some say no, ask how much mor
 
 ### 99 Bottles, Shameless Green Show & Tell
 
-
------
-Don't need bakeoff any more, I don't think.
------
-
-
-***Tell them:***
-
-* We're having a bake off.
-* Make your best pitch that you win the Shameless Green.
-
-***For each Show & Tell, ask:***
-
-* Did you write more code than the tests require?
-* Did you get **all** the tests passing before you started extracting methods?
-
 They might put evil pair code in #verse, #verses and #song to pass the tests.  If so, ask:
 
 * What responsibility does #verse have? (produce any verse)
@@ -407,7 +446,7 @@ They might put evil pair code in #verse, #verses and #song to pass the tests.  I
 
 Only #verse is responsible for producing a verse, the other methods are responsible for algorithms.
 
-For every Show & Tell, ask these questions:
+Ask these questions:
 
 * how many verse variants are there?
 * which verses are most alike?
@@ -415,12 +454,9 @@ For every Show & Tell, ask these questions:
 * in what way?
 * what's the algorithm for looping?
 
-After all Show & Tells:
-Have them choose a Shameless Green Winner.
-
 ***Ask:***
 
-* Is the winning code production ready? (if it’s never going to change, then of course!)
+* Is Shameless Green  production ready? (if it’s never going to change, then of course!)
 
 ***Things you might discuss:***
 
@@ -450,41 +486,16 @@ Whichever you choose, master should now contain a Bottles Shameless green, and t
 
 As break is ending, get another volunteer typist.  Make sure they do a ```git pull```.
 
+
 ***ASK:***
 
 * Should we stop here at Bottles Shameless Green?
 * What would justify a change to this code?
 * Introduce 6-packs requirement.
-* Talk about open/closed.
 
-Ask them what the O in SOLID stands for. (Open/Closed)
-Ask them what Open/Closed is short for. (Open for extension/Closed for Modification)
-Ask them what that means.
+***Reset their context***
 
-Talk briefly about open/closed:
-
-* Imagine a world in which you never have to change existing code to implement new behavior.
-* Don't worry that this seems impossible, just pretend for a minute that it's true.
-* If it's true, what are the consequences?
-
-Make sure they say:
-_If my code where open/closed:
-  Adding new behavior can't break distant and unrelated things.
-  My existing tests would always run green._
-
-***Tell them:***
-
-You should deal with new requirements in two steps.
-
-  1. Make the existing code open to the new requirement
-  1. Implement the new requirement
-
-Questions they should ask when thinking about a new requirement:
-
-  * Flowchart questions:
-    * is this code open/closed to 6-packs
-    * do you know how to make it open/closed
-    * fix the most approachable sin
+Remind them that writing new code using tests means writing code under red, and refactoring means making 1 lines changes under green.  These are different modes.  We're about to refactor Bottles Shameless Green, so we're in 'refactor' mode.
 
 For Bottles Shameless:
 
@@ -545,7 +556,7 @@ Tell them to take a break, but during the break to update their post-it goals.  
 
 ***BREAK***
 
-Update Post-it goals during break.
+Ask about pairing experience.  Talk about different pairing techniques.
 
 ## Bottles, Redux, continued
 
@@ -627,8 +638,6 @@ Even if you don't do a Show & Tell, get them to talk to each other about how it 
   (a sign that something might be wrong)
   * how to you fix code smells?
   (with curative refactoring recipes)
-  * who can tell us the name of some code smell they're familiar with?
-  (well, sometimes they can :-) )
   * what are the names of the code smells in this code?
   (primitive obsession, feature envy)
   * what's a primitive?
@@ -638,7 +647,7 @@ Even if you don't do a Show & Tell, get them to talk to each other about how it 
 
 Yeah, we wish we had a smarter number, and that's the next refactoring.
 
-'number' ought to be a first class object which hold onto a single value of number and implements all those methods; then you wouldn't have to pass the argument around, you could just get the right object and send it a message.
+'number' ought to be a first class object which holds onto a single value of number and implements all those methods; then you wouldn't have to pass the argument around, you could just get the right object and send it a message.
 
 **BREAK**
 
@@ -667,6 +676,8 @@ In Bottles, go into every method we've copied over and replace it's contents wit
 
 Then remove remove the method arguments one at a time, using a default of (number=self.number) or (sneakily) changing the name of the number argument to something else (notused=:deleteme)
 
+This is a good place to talk about caching, cache invaliidation, immutibility, and treating object creation as free.
+
 Once they get all of the forwarding in place, all of the forwarded methods can be made obsolete by just getting an instance of BottleNumber (well, two instances) in the #verse method. Have them do this next.
 
 When they attempt to get the 'next' BottleNumber, they should be unhappy with the #successor method.  They'll want successor to return a BottleNumber instead of a Fixnum.  Make sure they understand the problem:
@@ -677,7 +688,7 @@ When they attempt to get the 'next' BottleNumber, they should be unhappy with th
   * Don't want to get the result and have to do something to it
   * this is just like the problem of #amount needed to return a 'capitalizable'
 
-The #successor method is easiest to deal with as part of the 'factory' problem.  They don't really understand it, use that fact to urge them to put it off.
+The #successor method is more interesting to deal with as part of the 'factory' problem.  They don't really understand it, use that fact to urge them to put it off.
 
 ***Say:***
 
@@ -726,7 +737,6 @@ Their presentation should include a definition, examples (in code and/or in life
 
 
 OCTanner started they do Extract Class at 3:20
-UMinn1 started they do Extract Class at ?:??
 
 
 ### MOB 99 Bottles, Conditional to Polymorphism
@@ -737,7 +747,7 @@ UMinn1 started they do Extract Class at ?:??
 If planning to start from my extracted class, be sure you:
 
     git checkout master
-    git checkout origin/origin/bottles_3_dry_to_bottle_number -- bottles/
+    git checkout origin/bottles_3_dry_to_bottle_number -- bottles/
     git commit -m 'extracted BottleNumber class'
     git push origin master
 
@@ -811,6 +821,12 @@ If you turn data clumps into objects, behavior will coalesce into the new classe
 
 Fix the #quantity/#container data clump in verse by adding #to_s in BottleNumber.
 
+### Add 6-packs
+
+This is so easy and so satisfying that it's best to do it as a group.
+
+They should first change the tests (we're now back in the red-green-refactor cycle).
+
 
 ### Day 2 options
 
@@ -821,14 +837,6 @@ Classes which have students of widely different backgrounds tend to splinter dur
 * Do research on the methods in Enumerable, and make a presentation showing useful ways to enumerate over Arrays.
 * Play with adhoc/ruby_hierachy.rb file (you'll have to pull this folder into master) in irb and pry, and make a presentation.
 * Make a presentation about refinements: what they are, the scope in which they are active.
-* Factory explorations
-  * Fix the #successor Liskov violation
-  * Use const_get to make the factory we have open closed
-  * Do factory escalations
-      * What if you want the factory to be open to new subclasses? (metaprogramming, #const_get)
-      * What if you want better names? (Hash, YML, database list)
-      * What if you put the factory in a conversion method on Fixnum? (monkey patch)
-      * What if you want to disperse the logic that chooses the right class into the class that might be chosen (handler pattern)?
 
 
 
@@ -860,14 +868,36 @@ This seems easy, but they may have trouble with the Factory, and fixing the Lisk
 
 Once they all get through the conditional to polymorphism refactoring...
 
-### MOB 99 Bottles, Add 6-packs
+### Fix the #successor Liskov violation
+  * Move bottle_number_for to BottleNumber.for
+  * Temporarily add `return` to `for` if number is already a BottleNumber
+  * Fix the successor methods to return a BottleNumber-ish
+  * Use successor in Verses last line
+  * delete the temporary return
+Now `verses` does nothing with `number` other than turn it into something else.
+Talk about converting it to the right thing at first chance.
 
-This is so easy and so satisfying that it's best to do it as a group.
+### Factories
 
-They should first change the tests (we're now back in the red-green-refactor cycle).
+  * Use const_get to make the factory we have open closed
+  * Do factory escalations
+      * What if you want the factory to be open to new subclasses? (metaprogramming, #const_get)
+      * What if you want better names? (Hash, YML, database list)
+      * What if you put the factory in a conversion method on Fixnum? (monkey patch)
+      * What if you want to disperse the logic that chooses the right class into the class that might be chosen (handler pattern)?
 
-If it's not lunch-time yet, have some of them give presentations here.  Usually, however, presentations happen after lunch.
+### Monkey Patch Integer, Add Conversion method on BottleNumber
+  turning 3 dependencies into two
 
+### Rails Advice
+If there's time to talk about Rails, it's here.
+  * Don't use Concerns
+  * Don't use Helpers
+  * Don't let the framework API creep into your code
+    * Can only send ActiveRecord methods from direct subclasses
+    * Always use your own class methods/names scopes
+  * Consider the effect of the above on testing
+  * Consider the effect of the above on changing frameworks
 
 **LUNCH**
 
