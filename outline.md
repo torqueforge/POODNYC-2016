@@ -657,6 +657,7 @@ Yeah, we wish we had a smarter number, and that's the next refactoring.
 11:30 at UMinn
 
 **LUNCH** is very often here
+1:15 at NOTHS (we started at 9:15 and had a 45 minute lunch)
 
 Get the correct code into master, either the DRY solution they just created, or the one from the repo.
 
@@ -670,7 +671,7 @@ Get a new volunteer typist, have them ```git pull```.
 This next refactoring is in the bottles\_3\_dry\_to\_bottle\_number branch, but generally you:
 Create an empty class
 Copy the methods to it
-Add and attr_reader and initializer for number
+Add an attr_reader and initializer for number
 In Bottles, go into every method we've copied over and replace it's contents with
   BottleNumber.new(number).action(number)
 
@@ -713,16 +714,8 @@ Once Extract Class is done, ask:
 
 * is this code better of worse than Shameless Green?
 * how does it flog?
-* is it open/closed to 6-packs?
+* is it open/closed to 6-packs? Do you know how to make it open?
 
-O, my, we've managed to make things even worse.  Let's have...
-
-
-### 99 Bottles, They do DRY to Extract class
-If they mob this after lunch, then make SOLID posters before they pair on this, to give them time to forget.
-
-
-Make sure they all ```git pull```.
 
 ### Create SOLID posters
 
@@ -736,7 +729,37 @@ Their presentation should include a definition, examples (in code and/or in life
 **SHORT BREAK**
 
 
-OCTanner started they do Extract Class at 3:20
+### 99 Bottles, They do DRY to Extract class
+
+OCTanner started "They Do Extract Class" at 3:20
+
+Maybe put these notes on the board.
+
+  Extract class
+
+  Create the new class
+    Choose a class name
+    Copy the methods that are obsessing on the primitive
+    Add attr_reader and initializer to save primitive as a bit of data
+
+  Hook the new class into the old
+    In every copied method, forward the message.
+
+  Remove arguments from methods in new class
+    Change the name of the parameter in the new class
+    Remove the argument from the senders one by one
+    Remove the parameter+default
+
+  In #verse
+  Create temp variable for cn and sn
+  Use cn and sn
+
+  Remove the now obsolete methods from Bottles
+
+  Remove #amount #container data clump by implementing to_s
+
+
+Make sure they all ```git pull```.
 
 
 ### MOB 99 Bottles, Conditional to Polymorphism
@@ -953,6 +976,8 @@ RandomHouse Instructions:
       * Don't randomize over and over again, randomize once!
   * The rules are: you can't use a conditional, and House must be open to the new requirement.
   * Tell them that inheritance is perfect and to go write it.
+
+Pirate/Formal House Instructions
 
 EchoHouse Instructions:
   * Each bit should appear twice.
