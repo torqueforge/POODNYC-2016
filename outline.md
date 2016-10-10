@@ -54,6 +54,9 @@ Show the repo on the projector or write it on the board
 * For the next three days you’ll either be working (writing code) or talking to each other
 * We don’t like to be talked at so you'll be writing code right away
 
+
+Who has read the book?
+
 How much Ruby?
 How much TDD?
 How much pairing?
@@ -409,11 +412,11 @@ UserTesting at 1:30PM
 uminn2 at 2:3PM
 POODGATE at 2:00
 
-Consider asking them to switch pairs.
+SWITCH PAIRS
 
 Have them ```git pull``` and do House Shameless to DRY in pairs
 
-Should not need a Show & Tell, but if necessary, do it.
+Discuss their experience.  Was it easy or hard?  Scary or safe?
 
 Tell them:
 
@@ -733,7 +736,9 @@ Their presentation should include a definition, examples (in code and/or in life
 
 OCTanner started "They Do Extract Class" at 3:20
 
-Maybe put these notes on the board.
+Make sure they all ```git pull``` before starting.
+
+MAKE A POSTER WITH THE FOLLOWING LIST:
 
   Extract class
 
@@ -743,7 +748,7 @@ Maybe put these notes on the board.
     Add attr_reader and initializer to save primitive as a bit of data
 
   Hook the new class into the old
-    In every copied method, forward the message.
+    In every copied method of old class, forward the message to new class.
 
   Remove arguments from methods in new class
     Change the name of the parameter in the new class
@@ -751,21 +756,17 @@ Maybe put these notes on the board.
     Remove the parameter+default
 
   In #verse
-  Create temp variable for cn and sn
-  Use cn and sn
+  Create temp variable for bottle_number and next_bottle_number
+  Use them
 
   Remove the now obsolete methods from Bottles
 
   Remove #amount #container data clump by implementing to_s
 
 
-Make sure they all ```git pull```.
-
-
 ### MOB 99 Bottles, Conditional to Polymorphism
 
 3:00pm
-
 
 If planning to start from my extracted class, be sure you:
 
@@ -861,11 +862,20 @@ Classes which have students of widely different backgrounds tend to splinter dur
 * Play with adhoc/ruby_hierachy.rb file (you'll have to pull this folder into master) in irb and pry, and make a presentation.
 * Make a presentation about refinements: what they are, the scope in which they are active.
 
+Inheritance in BottleNumbers
+
+  why it’s ok to use inheritance safely here.
+  * at the edge of the object graph (leaf node)
+  * at least one subclass overrides every single method in the base class. All the behavior is used in the inheritance tree. Everything in the superclass varies (at some point in time).
+  I want the subclasses to be a complete specialization of all the behavior in the superclass. We have constrained the superclass to the behavior that we want to override.
+
+  objects at the core of the domain should probably not use inheritance.
+
 
 
 # DAY 3
 
-Prep the repo:
+Prep the repo with house and farm:
 
     git checkout master
 
@@ -1032,22 +1042,3 @@ Tell them the bit.ly day 3 survey link
 Give them a few minutes to fill out survey
 
 Hug and go
-
-
-
-------------
-------------
-pending
-
-
-  How does inheritance goes wrong?
-  “we end up sticking stuff in there”
-  it’s like a knife that turns in your hand.
-  Part of your superclass will change for reasons that are unrelated to you, and things begin to go off the rails.
-
-  why it’s ok to use inheritance safely here.
-  * at the edge of the object graph (leaf node)
-  * at least one subclass overrides every single method in the base class. All the behavior is used in the inheritance tree. Everything in the superclass varies (at some point in time).
-  I want the subclasses to be a complete specialization of all the behavior in the superclass. We have constrained the superclass to the behavior that we want to override.
-
-  objects at the core of the domain should probably not use inheritance.
